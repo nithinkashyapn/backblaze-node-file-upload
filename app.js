@@ -9,7 +9,7 @@ const B2 = require('easy-backblaze');
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
-const b2 = new B2('', '', {bucket: ''});
+const b2 = new B2('account_id', 'application_key', {bucket: 'bucket_name'});
 
 app.set('view engine', 'ejs');
 
@@ -23,7 +23,7 @@ app.get('/', (req,res) => {
 
 app.post('/upload', (req,res) => {
 
-    b2.uploadFile(`./images/${req.body.fileUploaded}`,{
+    b2.uploadFile(`./uploads/${req.body.fileUploaded}`,{
         name: simpleId() + req.body.fileUploaded
     },function(err, res) {
         console.log('Done!', err, res);
